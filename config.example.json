@@ -1,0 +1,84 @@
+{
+  "database": {
+    "dsn": "postgresql://netmonitor:netmonitor@localhost:5432/net_monitor",
+    "retention_days": 60
+  },
+  "web": {
+    "host": "0.0.0.0",
+    "port": 8080
+  },
+  "monitoring": {
+    "interval_seconds": 15,
+    "ping_count": 5,
+    "ping_timeout_seconds": 2,
+    "traceroute_cooldown_seconds": 300,
+    "night_start_hour": 19,
+    "night_end_hour": 7
+  },
+  "thresholds": {
+    "latency_warn_ms": 180.0,
+    "jitter_warn_ms": 30.0,
+    "loss_warn_pct": 5.0,
+    "tcp_warn_ms": 500.0
+  },
+  "mikrotik": {
+    "enabled": true,
+    "mode": "api",
+    "host": "10.1.0.1",
+    "port": 8728,
+    "username": "monitoreo",
+    "password": "",
+    "interfaces": ["pppoe-out1"],
+    "timeout_seconds": 6
+  },
+  "ping_targets": [
+    {
+      "name": "Salida Boom (8.8.8.8)",
+      "host": "8.8.8.8",
+      "category": "internet"
+    },
+    {
+      "name": "Hik-Connect Video Relay (vtmvirginia)",
+      "host": "148.153.53.29",
+      "category": "california",
+      "latency_warn_ms": 220.0
+    },
+    {
+      "name": "Salida Servitel Ref (1.1.1.1)",
+      "host": "1.1.1.1",
+      "category": "isp"
+    }
+  ],
+  "tcp_targets": [
+    {
+      "name": "Hik-Connect API (iusopen)",
+      "host": "iusopen.ezvizlife.com",
+      "port": 443,
+      "service_name": "Hik-Connect API",
+      "timeout_seconds": 3.0,
+      "enabled": true
+    },
+    {
+      "name": "Hik-Connect Auth (iusopenauth)",
+      "host": "iusopenauth.ezvizlife.com",
+      "port": 443,
+      "service_name": "Hik-Connect Auth",
+      "timeout_seconds": 3.0,
+      "enabled": true
+    }
+  ],
+  "dns_targets": [
+    {
+      "domain": "vtmvirginia.ezvizlife.com",
+      "timeout_seconds": 3.0
+    },
+    {
+      "domain": "iusopen.ezvizlife.com",
+      "timeout_seconds": 3.0
+    },
+    {
+      "domain": "google.com",
+      "timeout_seconds": 3.0
+    }
+  ]
+}

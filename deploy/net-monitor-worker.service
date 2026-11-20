@@ -1,0 +1,22 @@
+[Unit]
+Description=Net-Tool CCTV Monitor - Recolector de Métricas
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=netmonitor
+Group=netmonitor
+WorkingDirectory=/opt/net-tool
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/net-tool/.venv/bin/python -m app.main --config /opt/net-tool/config.json
+Restart=always
+RestartSec=5
+
+NoNewPrivileges=true
+PrivateTmp=true
+AmbientCapabilities=CAP_NET_RAW
+CapabilityBoundingSet=CAP_NET_RAW
+
+[Install]
+WantedBy=multi-user.target
